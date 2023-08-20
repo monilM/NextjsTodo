@@ -4,8 +4,7 @@ import Button from "@/components/atoms/Button";
 import Heading from "@/components/atoms/Heading";
 import Paragraph from "@/components/atoms/Paragraph";
 
-const LoginWelcome = ({ onLoginClickHandler, props }) => {
-  console.log("LoginWelcomeprops", props);
+const LoginWelcome = ({ onLoginClickHandler }) => {
   return (
     <LoginWelcomeStyleWrapper>
       <div>
