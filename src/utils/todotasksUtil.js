@@ -9,7 +9,18 @@ import {
 } from "firebase/firestore";
 
 const getAllDocs = async () => {
-  return await getDocs(collection(firestore, "todo"));
+  const resp = await getDocs(collection(firestore, "todo"));
+  if (resp && !resp.error) {
+    const newData = resp.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    console.log("alltodos", newData);
+    return newData;
+  } else {
+    console.log("error", resp);
+    return resp;
+  }
 };
 
 const addTodo = async (userId, { title, description }) => {

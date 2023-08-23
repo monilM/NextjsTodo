@@ -6,31 +6,8 @@ import { getAllDocs } from "@/utils/todotasksUtil";
 import { deleteTodo } from "@/utils/todotasksUtil";
 import Loader from "@/components/atoms/Loader";
 
-const DashboardContainer = () => {
-  const [todos, setTodos] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const getAllTasks = async () => {
-    await getAllDocs()
-      .then((querySnapshot) => {
-        const newData = querySnapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        console.log("alltodos", newData);
-        setIsLoading(false);
-        setTodos(newData);
-      })
-      .catch((error) => {
-        console.log("error", error);
-        setIsLoading(false);
-        return error;
-      });
-  };
-  // Fetch todos when the component mounts
-  useEffect(() => {
-    getAllTasks();
-  }, []);
+const DashboardContainer = ({ todos }) => {
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleDelete = async (todoId) => {
     // Implement logic to delete the todo with the specified ID
